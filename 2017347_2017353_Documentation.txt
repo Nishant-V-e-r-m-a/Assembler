@@ -1,0 +1,27 @@
+1. This software is an assembler that takes assembly language file as input, and produces output as a machine code.
+2. It is basically a two-pass assembler, that does assembly by iterating over assembly code file twice.
+3. Basically what it does is, in the first pass, it creates symbol and literal table of the input file code, and in the second pass, using initially created symbol and literal table as source, it produces the final machine code.
+4. The format of input file per line is some commands containing tab spaces in between as -
+LABEL	OPCODE	OPERAND	COMMENT
+5. This corresponds to one(out of possible many) line of instruction.
+6. Comments are optional in each line.
+7. While doing the assembly, there might be many errors that developer might have produced like missing operand, not defining variable etc., which will be reported in the output of assembly program in the IDE itself(not in the output file).
+8. There are mainly two types of errors, one type will simply report the error and stop the execution until error is fixed and does not produce any output, while other will simply report the error and ignore the issue for now and continue executing and will produce the output(machine code).
+9. The type of error will depend on the severity of that error.
+10. There can be single and multi line comments as well, simply write some text in a line starting with '#' without any tab space in between anywhere on the line(single line comment), and this can be repeated for multiple lines(multi line comment).
+
+The Errors which this software handles are -
+1. Declarative statement must contain symbols name, if it's not present then the code will report an error in that specefic line and will ignore that statement.
+2. Declarative statement must also contain symbol value, if it's not presesnt then the code will report an error in that specefic line and will ignore that statement.
+3. If in imperative statement, Assembly code contains a symbol (operand) which is predefined in machine language, it will report an error but will show other component of that line.
+4. If in declarative statement, Input File contains a symbol which is predefined in machine language (reserved keyword), then it will report error for whole statement and ignore it.
+5. If a symbol/label is declared multiple times, then it would report error and stop the execution until the error is fixed in the input.
+6. We cannot use a symbol name if it is once declared as a label name and vice versa, this will lead to stop of execution of the code until it's fixed by the input user.
+7. If the code doesn't contain a STOP condition, then the code won't execute and won't output the desired result that is needed until error is fixed.
+8. If a particular line is not an instruction line or a comment, and is not needed in the code, then it will be ignored while execution and point out which the line is.
+9. If the input file doesn't contain START statement, then the code will report this error but continue to execute the assembly code.
+10. If an OPCODE for a symbol is not mentioned/invalid, then it will report an error in that line and execute other statements and ignore that line.
+11. If an operand is mentioned against STP/CLA, then it will report error and ignore the operand.
+12. If an operand for a symobl is missing, then it will report an error and ignore the operand.
+13. If we put Label name instead of Variable name in the Operand, then it will report error in that line and ignore the operand.
+14. If an operand is used in the code but is not defined, then it will report error and ignore that operand in that line.
